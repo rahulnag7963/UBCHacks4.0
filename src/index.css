@@ -9,7 +9,15 @@ body, #root, .app {
 }
 
 * {
+  scroll-behavior: smooth;
   -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+h1 {
+  margin-top: 0;
+  margin-bottom: 0.5em;
+  font-size: 1.2em;
+  font-weight: 700;
 }
