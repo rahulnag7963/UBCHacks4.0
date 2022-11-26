@@ -25,10 +25,28 @@
   padding: 0.25em 0.5em;
   border: #696969 solid 1px;
   border-radius: 0.5em;
+
+  height: 3.1em;
+  animation: appear 0.5s;
 }
 
 .quests .quest-box.completed {
   color: #dddddd;
   border-color: #dddddd;
   text-decoration: line-through;
+
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  border-width: 0;
+  transition: opacity      0.3s linear 0.4s,
+              height       0.3s linear 0.4s,
+              margin       0.3s linear 0.4s,
+              padding      0.3s linear 0.4s,
+              border-width 0.3s linear 0.4s;
+}
+@keyframes appear {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
