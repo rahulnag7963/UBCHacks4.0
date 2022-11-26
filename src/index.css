@@ -1,3 +1,15 @@
-body {
+body, #root, .app {
+  position: absolute;
   margin: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 768px;
+  min-height: 432px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+* {
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;         /* Opera/IE 8+ */
 }
