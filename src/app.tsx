@@ -1,13 +1,19 @@
 import React from "react";
-import "./app.css";
+import "./App.css";
 import Quest from "./Components/Quest";
 import Information from "./Components/Information";
 import Action from "./Components/Action";
-function app() {
+function App() {
   return (
     <div className="app">
-      <Quest />
-      <Information />
+      <div className="left-panel">
+        <div>
+          <Quest />
+        </div>
+        <div>
+          <Information />
+        </div>
+      </div>
       <div className="actionComponent">
         <Action />
       </div>
@@ -15,4 +21,4 @@ function app() {
   );
 }
 
-export default app;
+export default App;

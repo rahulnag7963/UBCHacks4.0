@@ -1,13 +1,25 @@
 .app {
-    height: 500px;
-    width: 1000px;
-    background-color: rgb(39, 50, 148);
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
+  /* background-color: rgb(39, 50, 148); */
+  display: flex;
+  flex-direction: row;
+}
+
+.app > * {
+  padding: 1em;
+}
+
+.app .left-panel {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  height: 100%;
+}
+
+.app .left-panel > div {
+  max-height: 50%;
 }
 
 .actionComponent {
-    position: relative;
-    top: 440px;
+  height: 100%;
+  flex-grow: 1;
 }
