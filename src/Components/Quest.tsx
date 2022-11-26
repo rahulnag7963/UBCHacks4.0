@@ -35,7 +35,7 @@ const Quest = ({
             }${
               quest.target.cause ? ` for ${quest.target.cause}` : ''
             }${
-              quest.target.location ? ` at ${quest.target.location}` : ''
+              quest.target.location ? ` near ${quest.target.location}` : ''
             }`}
             <br />
             {`${quest.reward} EXP`}
