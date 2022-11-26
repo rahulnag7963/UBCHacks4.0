@@ -1,0 +1,10 @@
+.app {
+    height: 50px;
+    width: 100px;
+    background-color: #555;
+}
+
+.component {
+    text-align: center;
+    padding-top: 20rem;
+}

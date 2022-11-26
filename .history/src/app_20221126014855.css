@@ -1,0 +1,11 @@
+.app {
+    height: 500px;
+    width: 1000px;
+    background-color: rgb(39, 50, 148);
+    align-content: center;
+}
+
+.component {
+    text-align: center;
+    padding-top: 20rem;
+}

@@ -6,7 +6,7 @@ import Action from "./Components/Action";
 function app() {
   return (
     <div className="app">
-      <div className="Components">
+      <div className="">
         <Quest />
         <Information />
         <Action />
