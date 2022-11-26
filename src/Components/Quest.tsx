@@ -1,34 +1,44 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import QuestType from '../interfaces/QuestType'
 import './Quest.css'
 
-let oldQuests = [] as QuestType[]
+let renderedQuests = [] as QuestType[]
+
+const updateRenderedQuestList = (quests: QuestType[]) => {
+  renderedQuests = renderedQuests.filter((quest) => !quest.complete)
+
+  let newQuests = quests.filter((quest) => !renderedQuests.includes(quest))
+  renderedQuests.forEach(quest => {
+    if(!quests.includes(quest)) {
+      quest.complete = true
+    }
+  })
+
+  renderedQuests.push(...newQuests)
+}
 
 const Quest = ({
   quests
 }: {
   quests: QuestType[]
 }) => {
-  const firstActive = useRef<HTMLLIElement>(null)
 
-  const [completed, setCompleted] = useState<QuestType[]>([])
+  const [rendered, setRendered] = useState<QuestType[]>([])
 
   useEffect(() => {
-    setCompleted(oldQuests.filter((quest) => !quests.includes(quest)))
-    oldQuests = [...quests]
+    updateRenderedQuestList(quests)
+    setRendered(renderedQuests)
 
-    setTimeout(() => firstActive.current?.scrollIntoView(true), 1000)
   }, [quests])
 
   return (
     <div className='quests'>
       <h1>Quests</h1>
       <ul>
-        {[...completed, ...quests].map((quest, index) =>
+        {rendered.map((quest) =>
           <li
-            ref={index === completed.length ? firstActive : undefined}
-            key={`quest_${index}`}
-            className={`quest-box ${index < completed.length ? 'completed' : ''}`.trimEnd()}
+            key={`quest_${quest.id}`}
+            className={`quest-box ${quest.complete ? 'completed' : ''}`.trimEnd()}
           >
             {`Raise $${
               quest.target.donation

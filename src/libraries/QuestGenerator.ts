@@ -14,6 +14,8 @@ const STANDARD_DONATION_GOAL = 100
 let locations: Location[] = []
 let charities: Charity[] = []
 
+let questID = 0
+
 const setLocations = (arr: Location[]) => locations = [...arr]
 const setCharities =  (arr: Charity[]) => charities = [...arr]
 
@@ -35,6 +37,8 @@ const get = (lvl: number) => {
   const location = locations[Math.floor(Math.random() * locations.length)]
   const charity = charities[Math.floor(Math.random() * charities.length)]
 
+  questID++
+
   return {
     difficulty: Math.round(difficulty),
     reward: Math.round(reward),
@@ -43,6 +47,8 @@ const get = (lvl: number) => {
       location: requireLocation ? location.name : undefined,
       cause: requireCause ? charity.name : undefined,
     },
+    id: questID,
+    complete: false,
   } as QuestType
 }
 

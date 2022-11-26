@@ -6,6 +6,9 @@ interface QuestType {
     location?: string
     cause?: string
   }
+  
+  id: number
+  complete: boolean
 }
 
 export default QuestType
