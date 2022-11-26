@@ -19,8 +19,8 @@ const get = () => {
   const reward = STANDARD_REWARD * difficulty - (Math.random() * difficulty * 15)
   const donation = STANDARD_DONATION_GOAL * difficulty + (Math.random() * difficulty * 15)
 
-  let requireLocation = Math.random() >= 0.5
-  let requireCause = Math.random() >= 0.5
+  let requireLocation = locations.length > 0 && Math.random() >= 0.5
+  let requireCause = charities.length > 0 && Math.random() >= 0.5
 
   if (requireLocation && requireCause) {
     if (Math.random() >= 0.5) requireLocation = false
@@ -35,8 +35,8 @@ const get = () => {
     reward: Math.round(reward),
     target: {
       donation: Math.round(donation),
-      location: requireLocation ? location : undefined,
-      cause: requireCause ? charity : undefined,
+      location: requireLocation ? location.name : undefined,
+      cause: requireCause ? charity.name : undefined,
     },
   } as QuestType
 }
