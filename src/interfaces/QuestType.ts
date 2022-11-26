@@ -1,4 +1,4 @@
-interface Quest {
+interface QuestType {
   difficulty: number
   complete: boolean
   target: {
@@ -8,4 +8,4 @@ interface Quest {
   }
 }
 
-export default Quest
+export default QuestType
