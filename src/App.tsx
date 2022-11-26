@@ -1,11 +1,13 @@
 import React from "react";
-import "./App.css";
 import Quest from "./Components/Quest";
 import Information from "./Components/Information";
 import Action from "./Components/Action";
 import QuestType from "./interfaces/QuestType";
+import QuestGenerator from "./libraries/QuestGenerator";
+import "./App.css";
+
 function App() {
-  const [quests, setQuests] = React.useState<QuestType[]>([])
+  const [quests, setQuests] = React.useState<QuestType[]>(QuestGenerator.getMany(5))
 
   return (
     <div className="app">
