@@ -5,6 +5,7 @@ interface Item {
   factor: Factor
   effect: number
   lore: string
+  image: string
 }
 
 export default Item
