@@ -3,12 +3,15 @@ import "./App.css";
 import Quest from "./Components/Quest";
 import Information from "./Components/Information";
 import Action from "./Components/Action";
+import QuestType from "./interfaces/QuestType";
 function App() {
+  const [quests, setQuests] = React.useState<QuestType[]>([])
+
   return (
     <div className="app">
       <div className="left-panel">
         <div>
-          <Quest />
+          <Quest quests={quests} />
         </div>
         <div>
           <Information />
