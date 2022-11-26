@@ -2,6 +2,7 @@
   /* background-color: rgb(39, 50, 148); */
   display: flex;
   flex-direction: row;
+  font-size: 1.25em;
 }
 
 .app > * {
@@ -11,11 +12,12 @@
 .app .left-panel {
   display: flex;
   flex-direction: column;
-  width: 20%;
+  width: 25%;
   height: 100%;
 }
 
 .app .left-panel > div {
+  flex-basis: 50%;
   max-height: 50%;
 }
 
