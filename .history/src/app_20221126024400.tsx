@@ -8,7 +8,7 @@ function app() {
     <div className="app">
       <Quest />
       <Information />
-      <div className="actionComponent">
+      <div className="ActionComponent">
         <Action />
       </div>
     </div>

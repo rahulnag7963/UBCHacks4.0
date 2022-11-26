@@ -10,4 +10,6 @@
 .actionComponent {
     position: relative;
     top: 440px;
+    display: inline-block;
+    float: left;
 }

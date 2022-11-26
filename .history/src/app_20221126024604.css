@@ -8,6 +8,6 @@
 }
 
 .actionComponent {
-    position: relative;
-    top: 440px;
+    position: absolute;
+    bottom: 0;
 }
