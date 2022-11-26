@@ -5,6 +5,9 @@ import QuestType from "../interfaces/QuestType"
 const MIN_DIFFICULTY = 0.5
 const MAX_DIFFICULTY = 2.5
 
+const LEVEL_DIFFICULTY_EXPONENT = 1.5
+const LEVEL_DIFFICULTY_MODIFIER = 0.1
+
 const STANDARD_REWARD = 200
 const STANDARD_DONATION_GOAL = 100
 
@@ -14,8 +17,10 @@ let charities: Charity[] = []
 const setLocations = (arr: Location[]) => locations = [...arr]
 const setCharities =  (arr: Charity[]) => charities = [...arr]
 
-const get = () => {
-  const difficulty = Math.random() * (MAX_DIFFICULTY - MIN_DIFFICULTY) + MIN_DIFFICULTY
+const get = (lvl: number) => {
+  const difficulty =
+    Math.random() * (MAX_DIFFICULTY - MIN_DIFFICULTY) + MIN_DIFFICULTY +
+    Math.pow(lvl, LEVEL_DIFFICULTY_EXPONENT) * LEVEL_DIFFICULTY_MODIFIER
   const reward = STANDARD_REWARD * difficulty - (Math.random() * difficulty * 15)
   const donation = STANDARD_DONATION_GOAL * difficulty + (Math.random() * difficulty * 15)
 
@@ -41,9 +46,9 @@ const get = () => {
   } as QuestType
 }
 
-const getMany = (n: number) => {
+const getMany = (lvl: number, n: number) => {
   const arr = [] as QuestType[]
-  for (let i = 0; i < n; i++) arr.push(get())
+  for (let i = 0; i < n; i++) arr.push(get(lvl))
   return arr
 }
 

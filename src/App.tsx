@@ -7,7 +7,7 @@ import QuestGenerator from "./libraries/QuestGenerator";
 import "./App.css";
 
 function App() {
-  const [quests, setQuests] = React.useState<QuestType[]>(QuestGenerator.getMany(5))
+  const [quests, setQuests] = React.useState<QuestType[]>(QuestGenerator.getMany(150, 5))
 
   return (
     <div className="app">
