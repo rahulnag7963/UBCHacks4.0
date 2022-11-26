@@ -1,5 +1,6 @@
 interface QuestType {
   difficulty: number
+  reward: number
   target: {
     donation: number
     location?: string
