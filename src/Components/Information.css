@@ -1,0 +1,29 @@
+.information{ 
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.information li{
+  margin-left: -40px;
+  list-style-type: none;
+}
+
+.information h5 {
+  display: flex;
+  flex-direction: column;
+  margin:0px 0px 5px 0px;
+}
+.items {
+  transition: 0.3s;
+  background-color: #292929;
+  border-radius: 25px;
+}
+
+.information h6 {
+  padding: 10px;
+}
+
+.information img {
+  height:20%;
+  width: 20%;
+}

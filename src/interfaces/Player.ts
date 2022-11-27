@@ -4,6 +4,7 @@ interface Player {
   id: string
   name: string
   exp: number
+  energy: number
   items: Item[]
 }
 

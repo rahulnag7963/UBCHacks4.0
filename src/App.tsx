@@ -1,13 +1,31 @@
 import React from "react";
 import Quest from "./Components/Quest";
+import Item from "./interfaces/Item";
 import Information from "./Components/Information";
 import Action from "./Components/Action";
 import QuestType from "./interfaces/QuestType";
 import QuestGenerator from "./libraries/QuestGenerator";
+import Player from "./interfaces/Player";
 import "./App.css";
 
 function App() {
-  const [quests, setQuests] = React.useState<QuestType[]>(QuestGenerator.getMany(150, 5))
+  const [quests, setQuests] = React.useState<QuestType[]>(
+    QuestGenerator.getMany(10, 5)
+  );
+  const Item1: Item = {
+    name: "car",
+    factor: "time",
+    effect: 30,
+    lore: "Invented for the ease of transporation. Gets you from place to place in a short amount of time",
+    image: "",
+  };
+  const player1: Player = {
+    id: "player1",
+    name: "user1",
+    exp: 50,
+    energy: 40,
+    items: [Item1],
+  };
 
   return (
     <div className="app">
@@ -16,7 +34,7 @@ function App() {
           <Quest quests={quests} />
         </div>
         <div>
-          <Information />
+          <Information player={player1} />
         </div>
       </div>
       <div className="actionComponent">
