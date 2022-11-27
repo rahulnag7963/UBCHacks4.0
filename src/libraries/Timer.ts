@@ -5,7 +5,7 @@ const timer = (t: number) => ({
     return h === 0 ? 12 : h
   },
   isPM: () => t >= 720,
-  toString: () => `${timer(t).getHours()}:${timer(t).getMinutes()} ${!timer(t).isPM() ? 'AM' : 'PM'}`
+  toString: () => `${String(timer(t).getHours()).padStart(2, '0')}:${String(timer(t).getMinutes()).padStart(2, '0')} ${!timer(t).isPM() ? 'AM' : 'PM'}`
 })
 
 export default timer
