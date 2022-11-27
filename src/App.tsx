@@ -38,42 +38,72 @@ const CHARITIES: Charity[] = [
     abbr: 'the CATF',
     desc: 'Reduce and regulate air pollution',
     icon: '/assets/catf.jpg',
-    effect: {}
+    effect: {
+      'the park': [1.0, 1.4],
+      'the school': [1.1, 1.2],
+      'the streets': [0.9, 1.1],
+      'the mall': [0.6, 0.8]
+    }
   },
   {
     name: 'the Nature Conservacy of Canada',
     abbr: 'the NCC',
     desc: 'Conserve the nature',
     icon: '/assets/ncc.png',
-    effect: {}
+    effect: {
+      'the school': [1.0, 1.4],
+      'the streets': [0.5, 1.4],
+      'the park': [1.2, 1.3],
+      'the mall': [0.7, 0.9],
+    }
   },
   {
     name: 'One Tree Planted',
     abbr: 'One Tree Planted',
     desc: '$1 donated = one tree planted',
     icon: '/assets/otp.png',
-    effect: {}
+    effect: {
+      'the park': [0.8, 1.5],
+      'the school': [1.0, 1.3],
+      'the streets': [1.0, 1.2],
+      'the mall': [0.9, 1.0]
+    }
   },
   {
     name: 'Greenpeace',
     abbr: 'Greenpeace',
     desc: 'Our world cannot be green without peace',
     icon: '/assets/gp.jpg',
-    effect: {}
+    effect: {
+      'the streets': [0.9, 1.5],
+      'the mall': [1.0, 1.1],
+      'the school': [0.9, 1.1],
+      'the park': [0.9, 1.1]
+    }
   },
   {
     name: 'the Electronic Recycling Association',
     abbr: 'the ERA',
     desc: 'Your old electronics, someone\'s new upgrade',
     icon: '/assets/era.png',
-    effect: {}
+    effect: {
+      'the mall': [0.5, 1.8],
+      'the school': [0.9, 1.4],
+      'the streets': [0.2, 0.6],
+      'the park': [0.1, 0.4]
+    }
   },
   {
     name: 'Goodwill Industries',
     abbr: 'Goodwill',
     desc: 'Creating jobs while collecting and selling used goods',
     icon: '/assets/gw.jpg',
-    effect: {}
+    effect: {
+      'the school': [0.8, 1.6],
+      'the mall': [1.2, 1.4],
+      'the park': [0.8, 0.9],
+      'the streets': [0.5, 0.7]
+    }
   }
 ]
 

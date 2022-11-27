@@ -6,7 +6,7 @@ interface Charity {
   desc: string
   icon: string
   effect: {
-    [location: Location['name']]: number
+    [location: Location['name']]: [number, number]
   }
 }
 
