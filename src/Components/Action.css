@@ -1,4 +1,127 @@
-.Action{
-    display: flex;
-    flex-direction: row;
+.action {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.action .scene {
+  position: relative;
+  flex: 1 0 auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.action .scene .scene-info {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #ffffff;
+  padding: 0 1em 0.5em 0;
+}
+
+.action .scene .scene-info h1 {
+  margin-bottom: 0.1em;
+}
+
+.action .scene .scene-info span {
+  color: #c00606;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: 700;
+  font-size: 0.9em;
+}
+
+.action .controls {
+  height: 20%;
+  flex: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+}
+
+.action .controls > div {
+  flex: 1 0 30%;
+  padding: 1em 0;
+}
+
+.action .controls > div span {
+  display: block;
+  color: #696969;
+  font-size: 0.8em;
+  height: 3em;
+  line-height: 1em;
+}
+
+.action .controls > div button {
+  display: block;
+  width: 100%;
+  font-size: 0.8em;
+  line-height: 1em;
+  padding: 1em;
+  border: none;
+  cursor: pointer;
+  background-color: #a7fea7;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.action .controls > div button:not(:first-child) {
+  margin-top: 1em;
+}
+
+.action .controls > div button:hover {
+  background-color: #98eb98;
+}
+
+.modal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1em;
+  overflow: hidden;
+}
+
+.modal button {
+  background-color: unset;
+  border: none;
+  cursor: pointer;
+}
+
+.modal button:hover {
+  filter: brightness(0.8);
+}
+
+.modal .location {
+  flex: 1 0 40%;
+}
+
+.modal .charity {
+  flex: 1 0 25%;
+}
+
+.modal span {
+  display: block;
+}
+
+.modal .location span:nth-child(1) {
+  aspect-ratio: 16/9;
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.modal span:nth-child(2) {
+  font-size: 1.2em;
+  padding: 0.5em 0;
+  text-align: center;
+  height: 2.75em;
+}
+
+.modal .charity span:nth-child(1) {
+  width: 100%;
+  height: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
 }
