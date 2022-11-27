@@ -94,11 +94,16 @@ const Action = ({
                   </button>
                 ))
             : modalState === 2
-              ? (
-                <div>
-                  {/* TODO implement food choices */}
-                </div>
-              )
+              ? foodOptions.map((foodOption, index) => (
+                <button
+                  key={`cha_${foodOption.name.replaceAll(/[^a-z0-9]/gi, '_')}`}
+                  className="foodOption"
+                  onClick={() => handleButtonClick(2, index)}
+                >
+                  <span style={{ backgroundImage: `url(${foodOption.image})` }}></span>
+                  <span>{foodOption.name.toUpperCase()}</span>
+                </button>
+              ))
             : modalState === 3
               ? transportations.map((transportation, index) => (
                 <button

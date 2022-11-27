@@ -113,21 +113,21 @@ const FOODS: Food[] = [
     time: 25,
     energy: 60,
     lore: "a Burger",
-    image: "",
+    image: "/assets/burger.jpg",
   },
   {
     name: "Salad",
     time: 15,
     energy: 30,
     lore: "a Salad",
-    image: "",
+    image: "/assets/salad.jpg",
   },
   {
     name: "Juice",
     time: 5,
     energy: 5,
     lore: "Some Orange Juice",
-    image: "",
+    image: "/assets/orange_juice.jpg",
   }
 ]
 

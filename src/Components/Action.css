@@ -98,6 +98,10 @@
   flex: 1 0 25%;
 }
 
+.modal .foodOption {
+  flex: 1 0 20%;
+}
+
 .modal .transportation {
   flex: 1 0 20%;
 }
@@ -125,6 +129,14 @@
 .modal .charity span:nth-child(1) {
   width: 100%;
   height: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.modal .foodOption span:nth-child(1) {
+  width: 120px;
+  height: 120px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
