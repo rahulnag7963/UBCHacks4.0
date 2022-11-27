@@ -40,15 +40,18 @@ const Quest = ({
             key={`quest_${quest.id}`}
             className={`quest-box ${quest.complete ? 'completed' : ''}`.trimEnd()}
           >
-            {`Raise $${
-              quest.target.donation
-            }${
-              quest.target.cause ? ` for ${quest.target.cause}` : ''
-            }${
-              quest.target.location ? ` near ${quest.target.location}` : ''
-            }`}
-            <br />
-            {`${quest.reward} EXP`}
+            <span>
+              {`Raise $${
+                quest.target.donation
+              }${
+                quest.target.cause ? ` for ${quest.target.cause}` : ''
+              }${
+                quest.target.location ? ` near ${quest.target.location}` : ''
+              }`}
+            </span>
+            <span>
+              {`${quest.reward} EXP`}
+            </span>
           </li>
         )}
       </ul>

@@ -26,7 +26,7 @@
   border: #696969 solid 1px;
   border-radius: 0.5em;
 
-  height: 3.1em;
+  height: 4.2em;
   animation: appear 0.5s;
 }
 
@@ -49,4 +49,17 @@
 @keyframes appear {
   from { opacity: 0; }
   to   { opacity: 1; }
+}
+
+.quests .quest-box span {
+  display: block;
+}
+
+.quests .quest-box span:nth-child(1) {
+  margin-bottom: 0.25em;
+  height: 2.2em;
+}
+
+.quests .quest-box span:nth-child(2) {
+  color: #039c03;
 }
