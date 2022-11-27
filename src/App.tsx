@@ -6,8 +6,29 @@ import Action from "./Components/Action";
 import QuestType from "./interfaces/QuestType";
 import QuestGenerator from "./libraries/QuestGenerator";
 import Player from "./interfaces/Player";
+import Location from "./interfaces/Location";
 import "./App.css";
 
+const LOCATIONS: Location[] = [
+  {
+    name: 'the park',
+    image: '/assets/park.jpg'
+  },
+  {
+    name: 'the mall',
+    image: '/assets/mall.jpg'
+  },
+  {
+    name: 'the streets',
+    image: '/assets/streets.jpg'
+  },
+  {
+    name: 'the school',
+    image: '/assets/school.jpg'
+  },
+]
+
+QuestGenerator.setLocations(LOCATIONS)
 function App() {
   const [quests, setQuests] = React.useState<QuestType[]>(
     QuestGenerator.getMany(10, 5)
