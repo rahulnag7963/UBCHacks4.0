@@ -77,7 +77,7 @@ const CHARITIES: Charity[] = [
   }
 ]
 
-const Food: Food[] = [
+const FOODS: Food[] = [
   {
     name: "Burger",
     time: 25,
@@ -173,7 +173,7 @@ function App() {
               locations={LOCATIONS}
               transportations={TRANSPORTATIONS}
               charities={CHARITIES}
-              foodOptions={[]}
+              foodOptions={FOODS}
               onLocationChange={(index) => setCurrentLocation(index)}
               onCharityChange={(index) => setCurrentCharity(index)}
               onFoodConsumption={(index) => void 0}
