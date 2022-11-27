@@ -96,7 +96,7 @@ const CHARITIES: Charity[] = [
   {
     name: 'Goodwill Industries',
     abbr: 'Goodwill',
-    desc: 'Creating jobs while collecting and selling used goods',
+    desc: 'Collecting and selling used goods',
     icon: '/assets/gw.jpg',
     effect: {
       'the school': [0.8, 1.6],
