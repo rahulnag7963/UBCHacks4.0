@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal"
 import Charity from "../interfaces/Charity";
 import Location from "../interfaces/Location";
+import Transportation from "../interfaces/Transportation";
 import timer from "../libraries/Timer";
 import "./Action.css";
 
@@ -12,6 +13,7 @@ const Action = ({
   time,
   currentCharity,
   locations,
+  transportations,
   charities,
   foodOptions,
   onLocationChange,
@@ -23,19 +25,26 @@ const Action = ({
   time: number
   currentCharity: number
   locations: Location[]
+  transportations: Transportation[]
   charities: Charity[]
   foodOptions: any[]
-  onLocationChange: (index: number) => void
+  onLocationChange: (loc: number, trans: number) => void
   onCharityChange: (index: number) => void
   onFoodConsumption: (index: number) => void
   onSleepClick: () => void
 }) => {
+  const tempLoc = React.useRef<number>(0)
+
   const [modalOpen, setModalOpen] = React.useState<boolean>(false)
   const [modalState, setModalState] = React.useState<number>(0)
 
-  const handleButtonClick = (state: number, index: number) => {
-    setModalOpen(false)
-    ;[onLocationChange, onCharityChange, onFoodConsumption][state](index)
+  const handleButtonClick = (state: number, index0: number, index1?: number) => {
+    if (state !== 0) setModalOpen(false)
+    else {
+      tempLoc.current = index0
+      setModalState(3)
+    }
+    ;[onLocationChange, onCharityChange, onFoodConsumption][state](index0, index1 ?? -1)
   }
 
   return (
@@ -58,49 +67,51 @@ const Action = ({
             }
           }}
         >
-          {
-            modalState === 0
+          <div
+            className="modal"
+          >
+            {modalState === 0
+              ? locations.map((location, index) => (
+                  <button
+                    key={`loc_${location.name.replaceAll(/[^a-z0-9]/gi, '_')}`}
+                    className="location"
+                    onClick={() => handleButtonClick(0, index)}
+                  >
+                    <span style={{ backgroundImage: `url(${location.image})` }}></span>
+                    <span>{location.name.toUpperCase()}</span>
+                  </button>
+                ))
+            : modalState === 1
+              ? charities.map((charity, index) => (
+                  <button
+                    key={`cha_${charity.name.replaceAll(/[^a-z0-9]/gi, '_')}`}
+                    className="charity"
+                    onClick={() => handleButtonClick(1, index)}
+                  >
+                    <span style={{ backgroundImage: `url(${charity.icon})` }}></span>
+                    <span>{charity.name.toUpperCase()}</span>
+                  </button>
+                ))
+            : modalState === 2
               ? (
-                <div
-                  className="modal"
-                >
-                  {locations.map((location, index) => (
-                    <button
-                      key={`loc_${location.name.replaceAll(/[^a-z0-9]/gi, '_')}`}
-                      className="location"
-                      onClick={() => handleButtonClick(0, index)}
-                    >
-                      <span style={{ backgroundImage: `url(${location.image})` }}></span>
-                      <span>{location.name.toUpperCase()}</span>
-                    </button>
-                  ))}
+                <div>
+                  {/* TODO implement food choices */}
                 </div>
               )
-              : modalState === 1
-                ? (
-                  <div
-                    className="modal"
-                  >
-                    {charities.map((charity, index) => (
-                      <button
-                        key={`cha_${charity.name.replaceAll(/[^a-z0-9]/gi, '_')}`}
-                        className="charity"
-                        onClick={() => handleButtonClick(1, index)}
-                      >
-                        <span style={{ backgroundImage: `url(${charity.icon})` }}></span>
-                        <span>{charity.name.toUpperCase()}</span>
-                      </button>
-                    ))}
-                  </div>
-                )
-                : modalState === 2
-                  ? (
-                    <div>
-                      {/* TODO implement food choices */}
-                    </div>
-                  )
-                  : undefined
-          }
+            : modalState === 3
+              ? transportations.map((transportation, index) => (
+                <button
+                  key={`tra_${transportation.type}`}
+                  className="transportation"
+                  onClick={() => handleButtonClick(3, tempLoc.current, index)}
+                >
+                  <span style={{ backgroundImage: `url(${transportation.icon})` }}></span>
+                  <span>{transportation.type.toUpperCase()}</span>
+                </button>
+              ))
+            : undefined
+            }
+          </div>
         </Modal>
         <div className="scene-info">
           <h1>{locations[currentLocation].name.toUpperCase()}</h1>

@@ -98,6 +98,10 @@
   flex: 1 0 25%;
 }
 
+.modal .transportation {
+  flex: 1 0 20%;
+}
+
 .modal span {
   display: block;
 }
@@ -121,6 +125,14 @@
 .modal .charity span:nth-child(1) {
   width: 100%;
   height: 80px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.modal .transportation span:nth-child(1) {
+  width: 100px;
+  height: 100px;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
