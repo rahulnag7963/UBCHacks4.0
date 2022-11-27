@@ -7,6 +7,7 @@ import QuestType from "./interfaces/QuestType";
 import QuestGenerator from "./libraries/QuestGenerator";
 import Player from "./interfaces/Player";
 import Location from "./interfaces/Location";
+import Charity from "./interfaces/Charity";
 import "./App.css";
 
 const LOCATIONS: Location[] = [
@@ -28,7 +29,54 @@ const LOCATIONS: Location[] = [
   },
 ]
 
+const CHARITIES: Charity[] = [
+  {
+    name: 'the Clean Air Task Force',
+    abbr: 'the CATF',
+    desc: 'Reduce and regulate air pollution',
+    icon: '/assets/catf.jpg',
+    effect: {}
+  },
+  {
+    name: 'the Nature Conservacy of Canada',
+    abbr: 'the NCC',
+    desc: 'Conserve the nature',
+    icon: '/assets/ncc.png',
+    effect: {}
+  },
+  {
+    name: 'One Tree Planted',
+    abbr: 'One Tree Planted',
+    desc: '$1 donated = one tree planted',
+    icon: '/assets/otp.png',
+    effect: {}
+  },
+  {
+    name: 'Greenpeace',
+    abbr: 'Greenpeace',
+    desc: 'Our world cannot be green without peace',
+    icon: '/assets/gp.jpg',
+    effect: {}
+  },
+  {
+    name: 'the Electronic Recycling Association',
+    abbr: 'the ERA',
+    desc: 'Your old electronics, someone\'s new upgrade',
+    icon: '/assets/era.png',
+    effect: {}
+  },
+  {
+    name: 'Goodwill Industries',
+    abbr: 'Goodwill',
+    desc: 'Creating jobs while collecting and selling used goods',
+    icon: '/assets/gw.jpg',
+    effect: {}
+  }
+]
+
 QuestGenerator.setLocations(LOCATIONS)
+QuestGenerator.setCharities(CHARITIES)
+
 function App() {
   const [quests, setQuests] = React.useState<QuestType[]>(
     QuestGenerator.getMany(10, 5)
