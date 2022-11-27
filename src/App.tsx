@@ -135,19 +135,19 @@ const TRANSPORTATIONS: Transportation[] = [
   {
     type: 'bike',
     icon: '/assets/bike.jpg',
-    effect: 0.8,
+    effect: 1.2,
     energy: 3,
   },
   {
     type: 'bus',
     icon: '/assets/bus.jpg',
-    effect: 1.5,
+    effect: 1,
     energy: 1.5
   },
   {
     type: 'car',
     icon: '/assets/car.jpg',
-    effect: 3,
+    effect: 0.7,
     energy: 1
   }
 ]
