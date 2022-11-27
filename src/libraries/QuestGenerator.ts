@@ -45,7 +45,7 @@ const get = (lvl: number) => {
     target: {
       donation: Math.round(donation),
       location: requireLocation ? location.name : undefined,
-      cause: requireCause ? charity.name : undefined,
+      cause: requireCause ? charity.abbr : undefined,
     },
     id: questID,
     complete: false,
