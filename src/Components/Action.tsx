@@ -121,13 +121,19 @@ const Action = ({
       </div>
       <div className="controls">
         <div>
-          <span>Selected: {locations[currentLocation].name}</span>
+          <span>
+            {locations[currentLocation].name.charAt(0).toUpperCase() + locations[currentLocation].name.slice(1)}
+          </span>
           <button onClick={() => {setModalState(0); setModalOpen(true)}}>
             Switch Location
           </button>
         </div>
         <div>
-          <span>Selected: {charities[currentCharity].name}</span>
+          <span>
+            {charities[currentCharity].name.charAt(0).toUpperCase() + charities[currentCharity].name.slice(1)}
+            <br />
+            {charities[currentCharity].desc}
+          </span>
           <button onClick={() => {setModalState(1); setModalOpen(true)}}>
             Switch Charity
           </button>
