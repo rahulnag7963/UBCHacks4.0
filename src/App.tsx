@@ -75,10 +75,27 @@ const CHARITIES: Charity[] = [
   }
 ]
 
+const SAMPLE_ITEM: Item = {
+  name: "car",
+  factor: "time",
+  effect: 30,
+  lore: "Invented for the ease of transporation. Gets you from place to place in a short amount of time",
+  image: "",
+}
+
+const SAMPLE_PLAYER: Player = {
+  id: "player1",
+  name: "user1",
+  exp: 50,
+  energy: 40,
+  items: [SAMPLE_ITEM],
+}
+
 QuestGenerator.setLocations(LOCATIONS)
 QuestGenerator.setCharities(CHARITIES)
 
 function App() {
+  const [player, setPlayer] = React.useState<Player>(SAMPLE_PLAYER)
   const [xp, setXp] = React.useState<number>(1000)
   const [energy, setEnergy] = React.useState<number>(0)
   const [quests, setQuests] = React.useState<QuestType[]>(
@@ -87,45 +104,36 @@ function App() {
   const [currentLocation, setCurrentLocation] = React.useState<number>(0)
   const [currentCharity, setCurrentCharity] = React.useState<number>(0)
 
-  const Item1: Item = {
-    name: "car",
-    factor: "time",
-    effect: 30,
-    lore: "Invented for the ease of transporation. Gets you from place to place in a short amount of time",
-    image: "",
-  };
-  const player1: Player = {
-    id: "player1",
-    name: "user1",
-    exp: 50,
-    energy: 40,
-    items: [Item1],
-  };
-
   return (
     <div className="app">
-      <div className="left-panel">
-        <div>
-          <Quest quests={quests} />
-        </div>
-        <div>
-          <Information player={player1} />
-        </div>
-      </div>
-      <div className="actionComponent">
-        <Action
-          currentLocation={currentLocation}
-          time={1000}
-          currentCharity={currentCharity}
-          locations={LOCATIONS}
-          charities={CHARITIES}
-          foodOptions={[]}
-          onLocationChange={(index) => setCurrentLocation(index)}
-          onCharityChange={(index) => setCurrentCharity(index)}
-          onFoodConsumption={(index) => void 0}
-          onSleepClick={() => void 0}
-        />
-      </div>
+      {!player ? (
+        undefined // TODO login component goes here
+      ) : (
+        <>
+          <div className="left-panel">
+            <div>
+              <Quest quests={quests} />
+            </div>
+            <div>
+              <Information player={player} />
+            </div>
+          </div>
+          <div className="actionComponent">
+            <Action
+              currentLocation={currentLocation}
+              time={1000}
+              currentCharity={currentCharity}
+              locations={LOCATIONS}
+              charities={CHARITIES}
+              foodOptions={[]}
+              onLocationChange={(index) => setCurrentLocation(index)}
+              onCharityChange={(index) => setCurrentCharity(index)}
+              onFoodConsumption={(index) => void 0}
+              onSleepClick={() => void 0}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 }
