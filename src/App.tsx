@@ -5,6 +5,7 @@ import Information from "./Components/Information";
 import Action from "./Components/Action";
 import QuestType from "./interfaces/QuestType";
 import QuestGenerator from "./libraries/QuestGenerator";
+import exp from "./libraries/Exp"
 import Player from "./interfaces/Player";
 import Location from "./interfaces/Location";
 import Charity from "./interfaces/Charity";
@@ -78,9 +79,11 @@ QuestGenerator.setLocations(LOCATIONS)
 QuestGenerator.setCharities(CHARITIES)
 
 function App() {
+  const [xp, setXp] = React.useState<number>(1000)
+  const [energy, setEnergy] = React.useState<number>(0)
   const [quests, setQuests] = React.useState<QuestType[]>(
-    QuestGenerator.getMany(10, 5)
-  );
+    QuestGenerator.getMany(exp(xp).toLvl(), 5)
+  )
   const Item1: Item = {
     name: "car",
     factor: "time",
