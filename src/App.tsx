@@ -175,6 +175,7 @@ function App() {
   const [player, setPlayer] = React.useState<Player>(SAMPLE_PLAYER)
   const [xp, setXp] = React.useState<number>(1000)
   const [energy, setEnergy] = React.useState<number>(0)
+  const [time, setTime] = React.useState<number>(480) // 480-960
   const [quests, setQuests] = React.useState<QuestType[]>(
     QuestGenerator.getMany(exp(xp).toLvl(), 5)
   )
@@ -198,7 +199,7 @@ function App() {
           <div className="actionComponent">
             <Action
               currentLocation={currentLocation}
-              time={1000}
+              time={time}
               currentCharity={currentCharity}
               locations={LOCATIONS}
               transportations={TRANSPORTATIONS}
