@@ -9,6 +9,7 @@ import exp from "./libraries/Exp"
 import Player from "./interfaces/Player";
 import Location from "./interfaces/Location";
 import Charity from "./interfaces/Charity";
+import Food from "./interfaces/Food";
 import "./App.css";
 
 const LOCATIONS: Location[] = [
@@ -75,6 +76,29 @@ const CHARITIES: Charity[] = [
   }
 ]
 
+const Food: Food[] = [
+  {
+    name: "Burger",
+    time: 25,
+    energy: 60,
+    lore: "a Burger",
+    image: "",
+  },
+  {
+    name: "Salad",
+    time: 15,
+    energy: 30,
+    lore: "a Salad",
+    image: "",
+  },
+  {
+    name: "Juice",
+    time: 5,
+    energy: 5,
+    lore: "Some Orange Juice",
+    image: "",
+  }
+]
 const SAMPLE_ITEM: Item = {
   name: "car",
   factor: "time",
