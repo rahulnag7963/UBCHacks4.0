@@ -1,12 +1,15 @@
 import React from "react";
 import Modal from "react-modal"
 import Charity from "../interfaces/Charity";
+import Food from "../interfaces/Food";
 import Location from "../interfaces/Location";
 import Transportation from "../interfaces/Transportation";
 import timer from "../libraries/Timer";
 import "./Action.css";
 
 Modal.setAppElement('#root')
+
+const to2Decimals = (num: number) => (Math.round(num * 100) / 100).toFixed(2)
 
 const Action = ({
   currentLocation,
@@ -16,10 +19,12 @@ const Action = ({
   transportations,
   charities,
   foodOptions,
+  donations,
   onLocationChange,
   onCharityChange,
   onFoodConsumption,
-  onSleepClick
+  onSleepClick,
+  onGameProgress
 }: {
   currentLocation: number
   time: number
@@ -27,11 +32,13 @@ const Action = ({
   locations: Location[]
   transportations: Transportation[]
   charities: Charity[]
-  foodOptions: any[]
+  foodOptions: Food[]
+  donations: Record<string, number>
   onLocationChange: (loc: number, trans: number) => void
   onCharityChange: (index: number) => void
   onFoodConsumption: (index: number) => void
   onSleepClick: () => void
+  onGameProgress: (progress: number) => boolean | void
 }) => {
   const tempLoc = React.useRef<number>(0)
 
@@ -123,11 +130,16 @@ const Action = ({
           <h1>{locations[currentLocation].name.toUpperCase()}</h1>
           <span>{timer(time).toString()}</span>
         </div>
+        <div className="progress-controls">
+          <button onClick={() => onGameProgress(60)}>Spend 1 Hour</button>
+        </div>
       </div>
       <div className="controls">
         <div>
           <span>
             {locations[currentLocation].name.charAt(0).toUpperCase() + locations[currentLocation].name.slice(1)}
+            <br />
+            Total: ${to2Decimals(donations[locations[currentLocation].name] ?? 0)}
           </span>
           <button onClick={() => {setModalState(0); setModalOpen(true)}}>
             Switch Location
@@ -137,7 +149,7 @@ const Action = ({
           <span>
             {charities[currentCharity].name.charAt(0).toUpperCase() + charities[currentCharity].name.slice(1)}
             <br />
-            {charities[currentCharity].desc}
+            Total: ${to2Decimals(donations[charities[currentCharity].abbr] ?? 0)}
           </span>
           <button onClick={() => {setModalState(1); setModalOpen(true)}}>
             Switch Charity

@@ -6,6 +6,7 @@ import Action from "./Components/Action";
 import QuestType from "./interfaces/QuestType";
 import QuestGenerator from "./libraries/QuestGenerator";
 import exp from "./libraries/Exp"
+import rp from "./libraries/RewardsProgram";
 import Player from "./interfaces/Player";
 import Location from "./interfaces/Location";
 import Charity from "./interfaces/Charity";
@@ -110,22 +111,22 @@ const CHARITIES: Charity[] = [
 const FOODS: Food[] = [
   {
     name: "Burger",
-    time: 25,
-    energy: 60,
+    time: 30,
+    energy: 20,
     lore: "a Burger",
     image: "/assets/burger.jpg",
   },
   {
     name: "Salad",
     time: 15,
-    energy: 30,
+    energy: 6,
     lore: "a Salad",
     image: "/assets/salad.jpg",
   },
   {
     name: "Juice",
     time: 5,
-    energy: 5,
+    energy: 2,
     lore: "Some Orange Juice",
     image: "/assets/orange_juice.jpg",
   }
@@ -135,37 +136,75 @@ const TRANSPORTATIONS: Transportation[] = [
   {
     type: 'bike',
     icon: '/assets/bike.jpg',
+    time: [20, 50],
     effect: 1.2,
-    energy: 3,
+    energy: 10,
   },
   {
     type: 'bus',
     icon: '/assets/bus.jpg',
+    time: [10, 30],
     effect: 1,
-    energy: 1.5
+    energy: 5
   },
   {
     type: 'car',
     icon: '/assets/car.jpg',
+    time: [5, 15],
     effect: 0.7,
     energy: 1
   }
 ]
 
-const SAMPLE_ITEM: Item = {
-  name: "car",
-  factor: "time",
-  effect: 30,
-  lore: "Invented for the ease of transporation. Gets you from place to place in a short amount of time",
-  image: "",
-}
+const ITEMS: Item[] = [
+  {
+    id: 1,
+    name: 'Electric Car',
+    factor: 'reward',
+    effect: 1.4,
+    lore: 'Travel like a car, green like a bus',
+    image: '/assets/items/car.svg'
+  },
+  {
+    id: 2,
+    name: 'Credit Card Machine',
+    factor: 'reward',
+    effect: 1.2,
+    lore: 'Blend in with the youths',
+    image: '/assets/items/ccm.jpg'
+  },
+  {
+    id: 3,
+    name: 'Credit Card Machine (Solar)',
+    factor: 'reward',
+    effect: 1.2,
+    lore: 'Even more affable among the youths',
+    image: '/assets/items/ccms.png'
+  },
+  {
+    id: 4,
+    name: 'Speech 100',
+    factor: 'reward',
+    effect: 2,
+    lore: 'Very persuasive',
+    image: '/assets/items/speech.png'
+  },
+  {
+    id: 5,
+    name: 'Portable Station',
+    factor: 'energy',
+    effect: 0.5,
+    lore: 'Lightweight and easy to setup!',
+    image: '/assets/items/tent.svg'
+  }
+]
 
 const SAMPLE_PLAYER: Player = {
   id: "player1",
-  name: "user1",
+  name: "Player 1",
   exp: 50,
   energy: 40,
-  items: [SAMPLE_ITEM],
+  items: [...ITEMS],
 }
 
 QuestGenerator.setLocations(LOCATIONS)
@@ -173,14 +212,111 @@ QuestGenerator.setCharities(CHARITIES)
 
 function App() {
   const [player, setPlayer] = React.useState<Player>(SAMPLE_PLAYER)
-  const [xp, setXp] = React.useState<number>(1000)
-  const [energy, setEnergy] = React.useState<number>(0)
+  const [xp, setXp] = React.useState<number>(1250000)
+  const [energy, setEnergy] = React.useState<number>(100)
   const [time, setTime] = React.useState<number>(480) // 480-960
   const [quests, setQuests] = React.useState<QuestType[]>(
-    QuestGenerator.getMany(exp(xp).toLvl(), 5)
+    QuestGenerator.getMany(exp(xp).toLvl(), 3)
   )
   const [currentLocation, setCurrentLocation] = React.useState<number>(0)
   const [currentCharity, setCurrentCharity] = React.useState<number>(0)
+  const [lastTransportation, setLastTransportation] = React.useState<number>(1)
+
+  const [donations, setDonations] = React.useState<number>(0)
+  const [allDonations, setAllDonations] = React.useState<Record<string, number>>({})
+
+  React.useEffect(() => {
+    setDonations(0)
+  }, [currentLocation, currentCharity])
+
+  React.useEffect(() => {
+    setPlayer({ ...player, exp: xp })
+  }, [xp])
+
+  React.useEffect(() => {
+    if (quests.length === 0) setQuests(QuestGenerator.getMany(exp(xp).toLvl(), 3))
+  }, [quests])
+
+  const handleLocationChange = (lIndex: number, tIndex: number) => {
+    const transport = TRANSPORTATIONS[tIndex]
+
+    const energyLeft = energy - transport.energy
+    const newTime = time + Math.floor(Math.random() * (transport.time[1] - transport.time[0]) + transport.time[0])
+
+    if (energyLeft < 0 || newTime > 960) return
+
+    setEnergy(energyLeft)
+    setTime(newTime)
+
+    setCurrentLocation(lIndex)
+    setLastTransportation(tIndex)
+  }
+
+  const handleGameProgression = (progress: number) => {
+    let energyCost = Math.random() * 5 + 15
+
+    player.items.forEach((item) => {
+      if (item.factor === 'energy') energyCost *= item.effect
+    })
+
+    const energyLeft = energy - energyCost,
+      newTime = (time + progress)
+    if (energyLeft < 0 || newTime > 960) return false
+    setEnergy(energyLeft)
+    setTime(newTime)
+
+    const loc = LOCATIONS[currentLocation],
+      char = CHARITIES[currentCharity],
+      transport = TRANSPORTATIONS[lastTransportation]
+
+    const currentDonation = rp.calc(progress, loc, char, transport, exp(xp).toLvl(), player.items)
+    const totalDonation = donations + currentDonation
+
+    const index = quests.findIndex((quest) =>
+      quest.target.donation <= totalDonation
+      && (quest.target.cause === undefined || quest.target.cause === char.abbr)
+      && (quest.target.location === undefined || quest.target.location === loc.name))
+
+    if (index !== -1) {
+      const q = quests[index]
+
+      quests.splice(index, 1)
+      setQuests([...quests, QuestGenerator.get(exp(xp).toLvl())])
+
+      setXp(xp + q.reward)
+      setDonations(totalDonation - q.target.donation)
+    } else {
+      setDonations(totalDonation)
+    }
+
+
+    if (!allDonations[loc.name]) allDonations[loc.name] = 0
+    allDonations[loc.name] += currentDonation
+    if (!allDonations[char.abbr]) allDonations[char.abbr] = 0
+    allDonations[char.abbr] += currentDonation
+
+    setAllDonations({ ...allDonations })
+  }
+
+  const handleFoodConsumption = (index: number) => {
+    const food = FOODS[index]
+
+    const newTime = time + food.time
+    if (newTime > 960) return
+
+    let newEnergy = energy + food.energy
+    if (newEnergy > 100) newEnergy = 100
+
+    setTime(newTime)
+    setEnergy(newEnergy)
+  }
+
+  const handleSleep = () => {
+    setTime(480)
+    setDonations(0)
+    setEnergy(100)
+    setQuests([])
+  }
 
   return (
     <div className="app">
@@ -193,7 +329,7 @@ function App() {
               <Quest quests={quests} />
             </div>
             <div>
-              <Information player={player} />
+              <Information player={player} xp={xp} energy={energy} items={ITEMS} />
             </div>
           </div>
           <div className="actionComponent">
@@ -205,10 +341,12 @@ function App() {
               transportations={TRANSPORTATIONS}
               charities={CHARITIES}
               foodOptions={FOODS}
-              onLocationChange={(index) => setCurrentLocation(index)}
+              donations={allDonations}
+              onLocationChange={handleLocationChange}
               onCharityChange={(index) => setCurrentCharity(index)}
-              onFoodConsumption={(index) => void 0}
-              onSleepClick={() => void 0}
+              onFoodConsumption={handleFoodConsumption}
+              onSleepClick={handleSleep}
+              onGameProgress={handleGameProgression}
             />
           </div>
         </>

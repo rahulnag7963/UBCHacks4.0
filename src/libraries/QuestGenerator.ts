@@ -41,6 +41,7 @@ const get = (lvl: number) => {
 
   return {
     difficulty: Math.round(difficulty),
+    ratio: donation / ((STANDARD_DONATION_GOAL + 15) * difficulty),
     reward: Math.round(reward),
     target: {
       donation: Math.round(donation),

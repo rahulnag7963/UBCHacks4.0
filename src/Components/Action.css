@@ -31,6 +31,32 @@
   font-size: 0.9em;
 }
 
+.action .progress-controls {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2em 0;
+}
+
+.action .progress-controls button {
+  font-weight: 700;
+  display: block;
+  width: 100%;
+  margin: auto;
+  font-size: 0.8em;
+  border: none;
+  cursor: pointer;
+  background-color: #81f2ff;
+  line-height: 1em;
+  padding: 1em;
+  transition: background-color 0.1s ease-in-out;
+}
+
+.action .progress-controls button:hover {
+  background-color: #7edde8;
+}
+
 .action .controls {
   height: 20%;
   flex: none;

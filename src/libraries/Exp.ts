@@ -5,6 +5,8 @@ const exp = (xp: number) => ({
   required: () => exp(xp).requiredTotal() - lvl2Exp(exp(xp).toLvl()),
   requiredTotal: () => lvl2Exp(exp(xp).toLvl() + 1),
   remaining: () => exp(xp).requiredTotal() - xp,
+  currentLevel: () => exp(xp).required() - exp(xp).remaining(),
+  ratio: () => exp(xp).currentLevel() / exp(xp).required()
 })
 
 exp.fromLevel = lvl2Exp

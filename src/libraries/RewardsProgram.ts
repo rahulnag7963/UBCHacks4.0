@@ -4,13 +4,13 @@ import Location from "../interfaces/Location"
 import Transportation from "../interfaces/Transportation"
 
 const rp = {
-  calc: (time: number, location: Location, charity: Charity, travel: Transportation, items: Item[]) => {
+  calc: (time: number, location: Location, charity: Charity, travel: Transportation, lvl: number, items: Item[]) => {
     const dpm = 2
 
     const getLocationBenefits = () =>
       charity.effect[location.name]
         ? Math.random()
-          * (charity.effect[location.name][1] - charity.effect[location.name][0])
+          * (Math.abs(charity.effect[location.name][1] - charity.effect[location.name][0]))
           + (charity.effect[location.name][0])
         : 1
 
@@ -21,6 +21,7 @@ const rp = {
     }
 
     donation *= travel.effect
+    donation *= Math.pow(lvl + 1, 2) / ((lvl + 1) * 5)
 
     items.forEach((item) => { if (item.factor === 'reward') donation *= item.effect })
 

@@ -2,39 +2,56 @@ import React from "react";
 import { Line } from "rc-progress";
 import "./Information.css";
 import Player from "../interfaces/Player";
-import Icon1 from "../Pictures/card_outline.png";
-import Icon2 from "../Pictures/card_outline_remove.png";
-import Icon3 from "../Pictures/card_place.png";
-import Icon4 from "../Pictures/card_remove.png";
-import Icon5 from "../Pictures/card_rotate.png";
-import Icon6 from "../Pictures/card_subtract.png";
-const Information = ({ player }: { player: Player }) => {
-  const xpLvl = Math.floor(Math.pow(player.exp / 10, 1 / 3));
+import exp from "../libraries/Exp";
+import Item from "../interfaces/Item";
+
+const Information = ({
+  player, xp, energy, items
+}: {
+  player: Player
+  xp: number
+  energy: number
+  items: Item[]
+}) => {
+  const _items = [...items]
+
+  ;(() => {
+    let index = (() => {
+      let index = 0
+      for (let i = 0; i < _items.length; i++) {
+        if (_items[i].id === 2) index = i
+        if (_items[i].id === 3) return index
+      }
+      return -1
+    })()
+
+    if (index !== -1) _items.splice(index, 1)
+  })()
+
   return (
     <div className="information">
       <ul>
-        <li>
-          <h5>Username: {player.name}</h5>
-          <h5>Level: {xpLvl}</h5>
+        <li style={{ marginBottom: '1em' }}>
+          <h5>{player.name}</h5>
+          <h5>Lvl {exp(xp).toLvl()}</h5>
         </li>
         <li>
           <h5>Experience</h5>
-          <Line percent={player.exp} strokeWidth={4} strokeColor="#33d6ff" />
+          <Line percent={exp(xp).ratio() * 100} strokeWidth={4} strokeColor="#33d6ff" />
         </li>
         <li>
           <h5>Energy</h5>
-          <Line percent={player.energy} strokeWidth={4} strokeColor="#00e600" />
-          <h5>Inventory</h5>
-        </li>
-        <li className="items">
-          <img src={Icon1} alt="" />
-          <img src={Icon2} alt="" />
-          <img src={Icon3} alt="" />
-          <img src={Icon4} alt="" />
-          <img src={Icon5} alt="" />
-          <img src={Icon6} alt="" />
+          <Line percent={energy} strokeWidth={4} strokeColor="#00e600" />
         </li>
       </ul>
+      <h5>Inventory</h5>
+      <div className="items">
+        {
+          _items.map((item) => (
+            <div key={item.id} style={{ backgroundImage: `url(${item.image})`}} />
+          ))
+        }
+      </div>
     </div>
   );
 };
