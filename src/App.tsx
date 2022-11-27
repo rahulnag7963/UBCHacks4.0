@@ -10,6 +10,7 @@ import Player from "./interfaces/Player";
 import Location from "./interfaces/Location";
 import Charity from "./interfaces/Charity";
 import Food from "./interfaces/Food";
+import Transportation from "./interfaces/Transportation";
 import "./App.css";
 
 const LOCATIONS: Location[] = [
@@ -99,6 +100,28 @@ const Food: Food[] = [
     image: "",
   }
 ]
+
+const TRANSPORTATIONS: Transportation[] = [
+  {
+    type: 'bike',
+    icon: '/assets/bike.jpg',
+    effect: 0.8,
+    energy: 3,
+  },
+  {
+    type: 'bus',
+    icon: '/assets/bus.jpg',
+    effect: 1.5,
+    energy: 1.5
+  },
+  {
+    type: 'car',
+    icon: '/assets/car.jpg',
+    effect: 3,
+    energy: 1
+  }
+]
+
 const SAMPLE_ITEM: Item = {
   name: "car",
   factor: "time",
@@ -148,6 +171,7 @@ function App() {
               time={1000}
               currentCharity={currentCharity}
               locations={LOCATIONS}
+              transportations={TRANSPORTATIONS}
               charities={CHARITIES}
               foodOptions={[]}
               onLocationChange={(index) => setCurrentLocation(index)}
