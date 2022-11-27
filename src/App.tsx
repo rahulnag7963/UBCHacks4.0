@@ -84,6 +84,9 @@ function App() {
   const [quests, setQuests] = React.useState<QuestType[]>(
     QuestGenerator.getMany(exp(xp).toLvl(), 5)
   )
+  const [currentLocation, setCurrentLocation] = React.useState<number>(0)
+  const [currentCharity, setCurrentCharity] = React.useState<number>(0)
+
   const Item1: Item = {
     name: "car",
     factor: "time",
@@ -110,7 +113,18 @@ function App() {
         </div>
       </div>
       <div className="actionComponent">
-        <Action />
+        <Action
+          currentLocation={currentLocation}
+          time={1000}
+          currentCharity={currentCharity}
+          locations={LOCATIONS}
+          charities={CHARITIES}
+          foodOptions={[]}
+          onLocationChange={(index) => setCurrentLocation(index)}
+          onCharityChange={(index) => setCurrentCharity(index)}
+          onFoodConsumption={(index) => void 0}
+          onSleepClick={() => void 0}
+        />
       </div>
     </div>
   );
