@@ -39,12 +39,13 @@ const Action = ({
   const [modalState, setModalState] = React.useState<number>(0)
 
   const handleButtonClick = (state: number, index0: number, index1?: number) => {
-    if (state !== 0) setModalOpen(false)
-    else {
+    if (state !== 0) {
+      setModalOpen(false)
+      ;[() => void 0, onCharityChange, onFoodConsumption, onLocationChange][state](index0, index1 ?? -1)
+    } else {
       tempLoc.current = index0
       setModalState(3)
     }
-    ;[onLocationChange, onCharityChange, onFoodConsumption][state](index0, index1 ?? -1)
   }
 
   return (
