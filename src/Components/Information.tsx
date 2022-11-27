@@ -27,12 +27,12 @@ const Information = ({ player }: { player: Player }) => {
           <h5>Inventory</h5>
         </li>
         <li className="items">
-          <img src={Icon1} />
-          <img src={Icon2} />
-          <img src={Icon3} />
-          <img src={Icon4} />
-          <img src={Icon5} />
-          <img src={Icon6} />
+          <img src={Icon1} alt="" />
+          <img src={Icon2} alt="" />
+          <img src={Icon3} alt="" />
+          <img src={Icon4} alt="" />
+          <img src={Icon5} alt="" />
+          <img src={Icon6} alt="" />
         </li>
       </ul>
     </div>
